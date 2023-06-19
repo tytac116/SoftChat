@@ -9,8 +9,7 @@ import {
     FormControl,
     useTheme,
     useMediaQuery,
-    Input,
-} from '@mui/material';
+} from "@mui/material";
 import {
     Search,
     Message,
@@ -20,10 +19,10 @@ import {
     Help,
     Menu,
     Close
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import { useDispatch, useSelector} from 'react-redux';  
-import { setMode, setLogout} from 'state';
-import { Form, useNavigate} from 'react-router-dom';
+import { setMode, setLogout} from "state";
+import { useNavigate} from 'react-router-dom';
 import FlexBetween from 'components/FlexBetween';
 
 
@@ -39,11 +38,11 @@ const Navbar = () => {
     const dark = theme.palette.neutral.dark;
     const background = theme.palette.background.default;
     const primaryLight =  theme.palette.primary.light;
-    const alt = theme.palette.alt.main;
+    const alt = theme.palette.background.alt;
 
-    const fullName = `${user.firstName} ${user.lastName}`;
+    const fullName = user ? `${user.firstName} ${user.lastName}` : '';
 
-    return <FlexBetween padding = "1rem 6% background = {alt}">
+    return ( <FlexBetween padding = "1rem 6%" backgroundColor = {alt}>
         <FlexBetween gap="1.75rem">
             <Typography 
                 fontWeight="bold"
@@ -51,16 +50,16 @@ const Navbar = () => {
                 onClick={ () => navigate("/home")}
                 sx = {{
                     "&:hover": {
-                        colour: primaryLight,
+                        color: primaryLight,
                         cursor: "pointer",
-                    }
+                    },
                 }}
             >
-                Sociopedia
+                SoftChat
             </Typography>
             {isNonMobileScreens &&  (
-                <FlexBetween backgroundColour={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
-                    <InputBase placeholder="Search" />
+                <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
+                    <InputBase placeholder="Search..." />
                     <IconButton>
                         <Search />
                     </IconButton>
@@ -75,7 +74,7 @@ const Navbar = () => {
                 <DarkMode sx = {{fontSize: "25px"}}/>
 
             ): (
-                <LightMode sx = {{colour: dark, fontSize: "25px"}}/>
+                <LightMode sx = {{color: dark, fontSize: "25px"}}/>
             )}
             </IconButton>
             <Message sx = {{fontSize: "25px"}}/>
@@ -85,7 +84,7 @@ const Navbar = () => {
                 <Select 
                     value = {fullName}
                     sx={{
-                        backgroundColour: neutralLight,
+                        backgroundColor: neutralLight,
                         width: "150px",
                         borderRadius: "0.25rem",
                         padding: "0.25rem 1rem",
@@ -94,10 +93,10 @@ const Navbar = () => {
                             width: "3rem",
                         },
                         "& .MuiSelect-select:focus": {
-                            backgroundColour: neutralLight,
+                            backgroundColor: neutralLight,
                         }
                     }}
-                    input = {<Input />}
+                    input = {<InputBase />}
                 >
                     <MenuItem value={fullName}>
                         <Typography>{fullName}</Typography>
@@ -125,7 +124,7 @@ const Navbar = () => {
                 zIndex ="10"
                 maxWidth = "100%"
                 minWidth = "100%"
-                backgroundColour= {background}
+                backgroundColor= {background}
             >
                 {/** ClOSE ICON */}
                 <Box display="flex" justifyContent="flex-end" p="1rem">
@@ -144,7 +143,7 @@ const Navbar = () => {
                 <DarkMode sx = {{fontSize: "25px"}}/>
 
             ): (
-                <LightMode sx = {{colour: dark, fontSize: "25px"}}/>
+                <LightMode sx = {{color: dark, fontSize: "25px"}}/>
             )}
             </IconButton>
             <Message sx = {{fontSize: "25px"}}/>
@@ -154,7 +153,7 @@ const Navbar = () => {
                 <Select 
                     value = {fullName}
                     sx={{
-                        backgroundColour: neutralLight,
+                        backgroundColor: neutralLight,
                         width: "150px",
                         borderRadius: "0.25rem",
                         padding: "0.25rem 1rem",
@@ -163,10 +162,10 @@ const Navbar = () => {
                             width: "3rem",
                         },
                         "& .MuiSelect-select:focus": {
-                            backgroundColour: neutralLight,
+                            backgroundColor: neutralLight,
                         }
                     }}
-                    input = {<Input />}
+                    input = {<InputBase />}
                 >
                     <MenuItem value={fullName}>
                         <Typography>{fullName}</Typography>
@@ -179,7 +178,7 @@ const Navbar = () => {
                 
             </Box>
         )}
-    </FlexBetween>
-}
+    </FlexBetween> );
+};
 
 export default Navbar;
